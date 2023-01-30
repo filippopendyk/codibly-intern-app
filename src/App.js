@@ -5,7 +5,7 @@ import Home from './pages/Home';
 
 function App() {
   return (
-    <div className='flex'>
+    <div className='p-8'>
       <SearchBar />
       <Routes>
         <Route index element={<Home/>}/>

@@ -3,25 +3,27 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
 import { fetchPosts } from "../components/Posts/postsSlice";
 import Posts from "../components/Posts/Posts";
+import { selectErrors } from "../features/errorsSlice";
 
 export default function Home(){
     const { searchId } = useSelector((state) => state.searchBar);
-    const { posts, isLoading, error } = useSelector((state) => state.posts);
+    const { posts, isLoading } = useSelector((state) => state.posts);
+    const error = useSelector((state) => state.errors);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchPosts(searchId));
     },[dispatch, searchId]);
 
+    if(isLoading){
+        return <div>Loading...</div>
+    }
+
     return (
         <div>
-            This is home comp
-            {/* {isLoading && <div>Loading...</div>}
-            {!isLoading && error ? <div>
-                <h2>Currently app wasnt able to fetch the posts.</h2>
-                <h3>Error message: <em>{error}</em></h3>
-            </div> : null}
-            {!isLoading && posts } */}
+            {!isLoading && posts.length ? (
+                <Posts posts={posts} />
+            ) : null }
         </div>
     )
 }
