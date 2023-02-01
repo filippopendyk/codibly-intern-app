@@ -22,7 +22,7 @@ export default function SearchBar(){
             <Box component="form">
             <TextField 
                 id="outlined-basic"
-                label="outlined"
+                label="Filter by Id"
                 variant="outlined"
                 value={searchId}
                 onChange={handleChange}
